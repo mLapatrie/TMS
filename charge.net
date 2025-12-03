@@ -1,0 +1,33 @@
+* C:\users\maxence\Desktop\dev\hardware\TMS\charge.asc
+L1 N001 N003 100µH
+L2 N003 N007 100µH
+R2 N004 0 10k
+R3 0 N006 10k
+R4 N006 N003 470
+D1 0 N006 BZX84B11VLY
+D2 0 N004 BZX84B11VLY
+M1 N001 N004 0 0 IRFP250N
+M2 N007 N006 0 0 IRFP250N
+D3 N006 N001 1N4148
+D4 N004 N007 1N4148
+C1 N001 N007 3µF
+L3 N001 N007 5µH
+V1 N003 0 24
+L4 0 N002 5000µH
+R5 N004 N003 470
+D7 N002 N005 1N4148
+C2 Vcap+ Vcap- 230µF
+R1 Vcap+ N005 8000
+D5 0 N005 1N4148
+D6 Vcap- 0 1N4148
+D8 Vcap- N002 1N4148
+.model D D
+.lib C:\users\maxence\Documents\LTspiceXVII\lib\cmp\standard.dio
+.model NMOS NMOS
+.model PMOS PMOS
+.lib C:\users\maxence\Documents\LTspiceXVII\lib\cmp\standard.mos
+.tran 0 10 0 startup uic
+.model sw SW(Ron=470, Roff=1G, Vt=0.5)
+K L3 L4 1
+.backanno
+.end
