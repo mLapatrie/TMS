@@ -1,4 +1,4 @@
-* C:\users\maxence\Desktop\dev\hardware\TMS\gate_driver.asc
+* Z:\home\maxence\dev\hardware\TMS\ltspice\gate_driver.asc
 V1 N003 0 PULSE(0 15 1u 35n 35n 50u)
 L1 N004 0 450µH
 L2 N005 aux 450µH
