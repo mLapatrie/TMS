@@ -1,0 +1,20 @@
+* C:\users\maxence\Desktop\dev\hardware\TMS\gate_driver.asc
+V1 N003 0 PULSE(0 15 1u 35n 35n 50u)
+L1 N004 0 450µH
+L2 N005 aux 450µH
+D1 N005 N006 D
+D2 aux gate D
+R1 gate N006 10
+R2 N004 N003 2.5
+Q1 N002 gate aux 0 NPN
+Q2 N001 N002 gate 0 PNP
+R3 N001 aux 1
+.model D D
+.lib C:\users\maxence\Documents\LTspiceXVII\lib\cmp\standard.dio
+.model NPN NPN
+.model PNP PNP
+.lib C:\users\maxence\Documents\LTspiceXVII\lib\cmp\standard.bjt
+.tran 0 50u 0 startup uic
+K L1 L2 0.999
+.backanno
+.end
