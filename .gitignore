@@ -1,1 +1,14 @@
+# LTSpice
 *.raw
+
+# KICAD
+*.kicad_prl
+*.lck
+\#auto_saved_files\#
+*-backups/
+
+*.csv
+*.pdf
+*.xml
+
+

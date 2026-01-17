@@ -1,22 +1,22 @@
-Circuit: * C:\users\maxence\Desktop\dev\hardware\TMS\charge.asc
+Circuit: * Z:\home\maxence\dev\hardware\TMS\ltspice\charge.asc
 
 Per .tran options, skipping operating point for transient analysis.
-Heightened Def Con from 7.959 to 7.959
+Heightened Def Con from 1.78297 to 1.78297
 
-Date: Tue Dec 02 23:46:52 2025
-Total elapsed time: 925.157 seconds.
+Date: Wed Jan 14 14:20:52 2026
+Total elapsed time: 135.752 seconds.
 
 tnom = 27
 temp = 27
 method = modified trap
-totiter = 616104281
-traniter = 616104281
-tranpoints = 147528191
-accept = 102346807
-rejected = 45181385
+totiter = 99967897
+traniter = 99967897
+tranpoints = 24159114
+accept = 16873823
+rejected = 7285292
 matrix size = 26
 fillins = 18
 solver = Normal
-Matrix Compiler1: 2.24 KB object code size  0.2/0.1/[0.2]
-Matrix Compiler2: off  [0.1]/0.1/0.2
+Matrix Compiler1:     127 opcodes  0.2/[0.1]/0.2
+Matrix Compiler2:     185 opcodes  0.1/[0.1]/0.2
 
