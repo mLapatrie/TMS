@@ -5,6 +5,7 @@
 *.dat.ngspice
 *.plt
 *.net
+*.sch
 
 # KICAD
 *.kicad_prl
