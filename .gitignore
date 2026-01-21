@@ -1,5 +1,10 @@
 # LTSpice
 *.raw
+*.fft
+*.log
+*.dat.ngspice
+*.plt
+*.net
 
 # KICAD
 *.kicad_prl
