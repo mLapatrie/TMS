@@ -667,9 +667,6 @@
   (junction (at 186.69 93.98) (diameter 0) (color 0 0 0 0)
     (uuid 61e99769-015e-4932-88c1-df79033b46b4)
   )
-  (junction (at 66.04 31.75) (diameter 0) (color 0 0 0 0)
-    (uuid 6691f8c2-f69e-4f7b-8e74-7d1ab02de44c)
-  )
   (junction (at 157.48 114.3) (diameter 0) (color 0 0 0 0)
     (uuid 844761ba-305d-48f7-bae7-3ea8dbe1ff71)
   )
@@ -693,6 +690,9 @@
   )
   (junction (at 238.76 54.61) (diameter 0) (color 0 0 0 0)
     (uuid e0e86474-4dc3-4398-9cd4-280e12c80bf8)
+  )
+  (junction (at 68.58 31.75) (diameter 0) (color 0 0 0 0)
+    (uuid e714681b-ecfe-4ae9-b2f7-8938fa602413)
   )
   (junction (at 157.48 93.98) (diameter 0) (color 0 0 0 0)
     (uuid e74ee706-e81e-46d3-b36d-f01f55980312)
@@ -752,7 +752,7 @@
     (stroke (width 0) (type default))
     (uuid 1638eee1-31d6-4325-8c89-df272e75204f)
   )
-  (wire (pts (xy 66.04 31.75) (xy 72.39 31.75))
+  (wire (pts (xy 55.88 31.75) (xy 68.58 31.75))
     (stroke (width 0) (type default))
     (uuid 16cf2043-c5fe-478c-b22d-418ab2174f85)
   )
@@ -767,10 +767,6 @@
   (wire (pts (xy 184.15 133.35) (xy 194.31 133.35))
     (stroke (width 0) (type default))
     (uuid 25fca6fb-d468-4e4f-8006-7ea3c16fe246)
-  )
-  (wire (pts (xy 55.88 31.75) (xy 66.04 31.75))
-    (stroke (width 0) (type default))
-    (uuid 314d04de-85e4-4ebf-83aa-363a6a0c9117)
   )
   (wire (pts (xy 207.01 54.61) (xy 220.98 54.61))
     (stroke (width 0) (type default))
@@ -864,7 +860,7 @@
     (stroke (width 0) (type default))
     (uuid 6af74210-053a-4f8c-861d-9c8162e2a6aa)
   )
-  (wire (pts (xy 55.88 39.37) (xy 66.04 39.37))
+  (wire (pts (xy 55.88 39.37) (xy 68.58 39.37))
     (stroke (width 0) (type default))
     (uuid 7033994e-4386-4c0d-80d0-f3033cca20cf)
   )
@@ -887,6 +883,10 @@
   (wire (pts (xy 130.81 99.06) (xy 137.16 99.06))
     (stroke (width 0) (type default))
     (uuid 7cdc5745-8a8b-4b28-a1eb-510b484e8cdc)
+  )
+  (wire (pts (xy 68.58 31.75) (xy 72.39 31.75))
+    (stroke (width 0) (type default))
+    (uuid 7f6a64ca-e255-475b-8cba-ddfa6be4eca7)
   )
   (wire (pts (xy 161.29 74.93) (xy 168.91 74.93))
     (stroke (width 0) (type default))
@@ -1311,7 +1311,7 @@
   (symbol (lib_id "Regulator_Linear:L7812") (at 229.87 31.75 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 3d6ecadb-4601-4cb2-9cbc-7f95d1861c02)
-    (property "Reference" "U4" (at 229.87 25.4 0)
+    (property "Reference" "U1" (at 229.87 25.4 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "L7812CV" (at 229.87 27.94 0)
@@ -1329,7 +1329,7 @@
     (instances
       (project "tms"
         (path "/dc88686f-c772-4c63-b1cc-83a281c6b46c"
-          (reference "U4") (unit 1)
+          (reference "U1") (unit 1)
         )
       )
     )
@@ -1364,7 +1364,7 @@
   (symbol (lib_id "Device:R") (at 170.18 109.22 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 5f0d7aaa-d038-4c7e-ba12-42c094113a4d)
-    (property "Reference" "R8" (at 167.64 107.95 0)
+    (property "Reference" "R10" (at 167.64 107.95 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "0.1Ω" (at 167.64 110.49 0)
@@ -1381,7 +1381,7 @@
     (instances
       (project "tms"
         (path "/dc88686f-c772-4c63-b1cc-83a281c6b46c"
-          (reference "R8") (unit 1)
+          (reference "R10") (unit 1)
         )
       )
     )
@@ -1520,7 +1520,7 @@
   (symbol (lib_id "Device:R") (at 199.39 93.98 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 7c079363-bca9-409e-9818-ed1cb8c21bec)
-    (property "Reference" "R7" (at 199.39 87.63 90)
+    (property "Reference" "R7,R8,R9" (at 199.39 87.63 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "3x 10Ω" (at 199.39 90.17 90)
@@ -1537,7 +1537,7 @@
     (instances
       (project "tms"
         (path "/dc88686f-c772-4c63-b1cc-83a281c6b46c"
-          (reference "R7") (unit 1)
+          (reference "R7,R8,R9") (unit 1)
         )
       )
     )
@@ -1600,7 +1600,7 @@
     (property "Reference" "C4" (at 58.42 34.29 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "100F" (at 58.42 36.83 0)
+    (property "Value" "100 uF" (at 58.42 36.83 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "" (at 56.8452 39.37 0)
@@ -1674,7 +1674,7 @@
   (symbol (lib_id "Device:C") (at 238.76 58.42 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid a4b2374c-4190-42fc-b790-2110c544ae7a)
-    (property "Reference" "C19" (at 242.57 57.15 0)
+    (property "Reference" "C9" (at 242.57 57.15 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "0.1μF" (at 242.57 59.69 0)
@@ -1691,7 +1691,7 @@
     (instances
       (project "tms"
         (path "/dc88686f-c772-4c63-b1cc-83a281c6b46c"
-          (reference "C19") (unit 1)
+          (reference "C9") (unit 1)
         )
       )
     )
@@ -1700,7 +1700,7 @@
   (symbol (lib_id "Regulator_Linear:L7812") (at 229.87 54.61 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid a63a5f2b-2ed9-465e-b388-b38d8650d99b)
-    (property "Reference" "U5" (at 229.87 48.26 0)
+    (property "Reference" "U2" (at 229.87 48.26 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "L7805CV" (at 229.87 50.8 0)
@@ -1718,7 +1718,7 @@
     (instances
       (project "tms"
         (path "/dc88686f-c772-4c63-b1cc-83a281c6b46c"
-          (reference "U5") (unit 1)
+          (reference "U2") (unit 1)
         )
       )
     )
@@ -1727,7 +1727,7 @@
   (symbol (lib_id "Device:R") (at 180.34 133.35 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b0a9ae98-6df1-4e54-857c-9a2f09e2147b)
-    (property "Reference" "R10" (at 180.34 127 90)
+    (property "Reference" "R12" (at 180.34 127 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "R" (at 180.34 129.54 90)
@@ -1744,7 +1744,7 @@
     (instances
       (project "tms"
         (path "/dc88686f-c772-4c63-b1cc-83a281c6b46c"
-          (reference "R10") (unit 1)
+          (reference "R12") (unit 1)
         )
       )
     )
@@ -1753,7 +1753,7 @@
   (symbol (lib_id "Device:C") (at 220.98 58.42 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b2aaa5a0-5a08-490d-9b74-d7b99843add2)
-    (property "Reference" "C18" (at 217.17 57.15 0)
+    (property "Reference" "C8" (at 217.17 57.15 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "0.33μF" (at 217.17 59.69 0)
@@ -1770,7 +1770,7 @@
     (instances
       (project "tms"
         (path "/dc88686f-c772-4c63-b1cc-83a281c6b46c"
-          (reference "C18") (unit 1)
+          (reference "C8") (unit 1)
         )
       )
     )
@@ -1830,7 +1830,7 @@
   (symbol (lib_id "Device:R") (at 172.72 133.35 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid cf1b2368-38f0-4198-92ce-a7f21e73ec51)
-    (property "Reference" "R9" (at 172.72 127 90)
+    (property "Reference" "R11" (at 172.72 127 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "1kΩ 50W" (at 176.53 129.54 90)
@@ -1847,7 +1847,7 @@
     (instances
       (project "tms"
         (path "/dc88686f-c772-4c63-b1cc-83a281c6b46c"
-          (reference "R9") (unit 1)
+          (reference "R11") (unit 1)
         )
       )
     )
@@ -1879,19 +1879,19 @@
     )
   )
 
-  (symbol (lib_id "Device:C") (at 66.04 35.56 0) (unit 1)
+  (symbol (lib_id "Device:C") (at 68.58 35.56 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid e4779434-70eb-47d3-9315-ee0b5a894b19)
-    (property "Reference" "C5" (at 68.58 34.29 0)
+    (property "Reference" "C5" (at 71.12 34.29 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "0.1F" (at 68.58 36.83 0)
+    (property "Value" "0.1 uF" (at 71.12 36.83 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "" (at 67.0052 39.37 0)
+    (property "Footprint" "" (at 69.5452 39.37 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "~" (at 66.04 35.56 0)
+    (property "Datasheet" "~" (at 68.58 35.56 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "2" (uuid d4ee2de8-d50b-49e6-a994-f3b60a774ea0))
