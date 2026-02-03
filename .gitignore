@@ -12,6 +12,7 @@
 *.lck
 \#auto_saved_files\#
 *-backups/
+fp-info-cache
 
 *.csv
 *.xml
