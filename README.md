@@ -2,6 +2,10 @@
 
 Schematics and simulations for a low-cost TMS device.
 
+## controller_arduino/
+Contains the code for the control interface of the TMS.
+controller_arduino.ino controls the charging, discharging, and some safety processes of the TMS.
+
 ## kicad/
 Contains KiCad schematics for the whole build.
 tms_schematic.pdf contains the printed-out version of the schematics.
