@@ -2,6 +2,7 @@ import pyvisa
 import os
 import time
 import csv
+import re
 
 rm = pyvisa.ResourceManager("@py")
 print(rm.list_resources())
@@ -9,12 +10,28 @@ print(rm.list_resources())
 scope = rm.open_resource('USB0::62700::60986::SDS1MGDQ4R2387::0::INSTR')
 scope.timeout = 5000
 
+component = "y"
 rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 columns = range(1, 16)
 captures = range(1, 4)
 
-os.makedirs("./waveforms", exist_ok=True)
 
+start_row = 7
+start_col = 11
+
+os.makedirs(f"./waveforms/{component}_component", exist_ok=True)
+
+def extract_float(response):
+    parts = response.split(" ")
+    if len(parts) > 1:
+        target = parts[1]
+    else:
+        target = response
+
+    match = re.search(r"[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?", target)
+    if match:
+        return float(match.group(0))
+    raise ValueError(f"Parse failure: {response}")
 
 def draw_grid(current_r, current_c):
     os.system('clear')
@@ -34,23 +51,54 @@ def draw_grid(current_r, current_c):
 
 for r_idx, row in enumerate(rows):
     for c_idx, col in enumerate(columns):
+        
+        # skip to start point
+        if r_idx < start_row or r_idx <= start_row and c_idx < start_col:
+            print(r_idx, start_row, c_idx, start_col)
+            continue
+
         draw_grid(r_idx, c_idx)
         for capture in captures:
             print(f"Point {row},{col} Capture {capture}/3")
-            input("Press Enter after capturing")
+            input("Press enter to save waveform")
 
-            scope.write("C1:WF? DAT2")
-            raw_data = scope.read_raw()
+            while True:
+                try:
+                    vdiv_resp = scope.query("C1:VDIV?")
+                    vdiv = extract_float(vdiv_resp)
+                    
+                    ofst_resp = scope.query("C1:OFST?")
+                    voffset = extract_float(ofst_resp)
+                    
+                    sara_resp = scope.query("SARA?")
+                    sara = extract_float(sara_resp)
 
-            header_length = 16
-            waveform_data = raw_data[header_length:-2]
+                    print(f"Parameters: {vdiv} V/div | {sara} Sa/s")
 
-            filename = f"waveforms/waveform_{row}{col}_{capture}.csv"
-            with open(filename, mode='w', newline='') as file:
-                writer = csv.writer(file)
-                writer.writerow(["Index", "Raw_Value"])
-                for i, val in enumerate(waveform_data):
-                    writer.writerow([i, val])
+                    scope.write("C1:WF? DAT2")
+                    raw_data = scope.read_raw()
+
+                    header_length = 16
+                    waveform_data = raw_data[header_length:-2]
+
+                    filename = f"waveforms/{component}_component/waveform_{row}{col}_{capture}.csv"
+                    with open(filename, mode='w', newline='') as file:
+                        writer = csv.writer(file)
+                        writer.writerow(["Time (s)", "Voltage (V)"])
+                        
+                        for i, val in enumerate(waveform_data):
+                            if val > 127:
+                                code = val - 256
+                            else:
+                                code = val
+                                
+                            voltage = code * (vdiv / 25) - voffset
+                            time_sec = i * (1 / sara)
+                            writer.writerow([time_sec, voltage])
+
+                    break
+                except Exception as e:
+                    print(f"Error reading data. Details: {e}")
 
             time.sleep(0.01)
 
