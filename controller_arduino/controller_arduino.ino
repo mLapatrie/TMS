@@ -11,8 +11,8 @@ static const uint8_t FIRE_CTRL       = 3;            // SCR gate pulse
 static const uint8_t CHARGE_CTRL     = 4;            // HIGH = charge
 static const uint8_t CAP_VOLTAGE     = A0;           // 0-5 V from divider
 
-// Polarity of COMPARATOR_STOP. HIGH = tripped.
-#define COMP_STOP_ACTIVE HIGH
+// Polarity of COMPARATOR_STOP. LOW = tripped.
+#define COMP_STOP_ACTIVE LOW
 
 // ===== Firmware overvoltage backup =====
 // PLACEHOLDER. 10-bit ADC count. Set from divider ratio and target bus voltage.
@@ -96,7 +96,7 @@ static void handle_command(const char *cmd) {
   else if (strcmp(cmd, "UNCHARGE") == 0) {
     digitalWrite(CHARGE_CTRL, LOW);
     charging  = false;
-    charge_ok = false;
+    //charge_ok = false;
     Serial.println("UNCHARGED");
   }
   else if (strcmp(cmd, "ARM") == 0) {
