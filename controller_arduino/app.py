@@ -263,13 +263,15 @@ class MainScreen(Screen):
         Binding("q", "quit", "quit"),
     ]
 
-    def __init__(self, bridge: SerialBridge, divider: float, vref: float, max_adc: int) -> None:
+    def __init__(self, bridge: SerialBridge, divider: float, vref: float, max_adc: int,
+                 avg_window: int) -> None:
         super().__init__()
         self.bridge = bridge
         self.divider = divider
         self.vref = vref
         self.max_adc = max_adc
-        self.history: deque[int] = deque(maxlen=HISTORY_LEN)
+        self.avg_window = max(1, avg_window)
+        self.history: deque[int] = deque(maxlen=max(HISTORY_LEN, self.avg_window))
         # telemetry state
         self.tele_adc = 0
         self.tele_t_ms = 0
@@ -325,6 +327,15 @@ class MainScreen(Screen):
         v_pin = (self.tele_adc / 1023.0) * self.vref
         v_bus = v_pin * self.divider
         pct = (self.tele_adc / self.max_adc * 100.0) if self.max_adc else 0.0
+        # moving average over the last N ADC samples
+        window = list(self.history)[-self.avg_window:]
+        n_avg = len(window)
+        if n_avg > 0:
+            avg_adc = sum(window) / n_avg
+            v_bus_avg = (avg_adc / 1023.0) * self.vref * self.divider
+            avg_str = f"{v_bus_avg:>8.1f}"
+        else:
+            avg_str = "     ---"
         ms = self.tele_t_ms
         tstr = f"{ms // 60000:02d}:{(ms // 1000) % 60:02d}.{ms % 1000:03d}"
         # sparkline colour reflects overvoltage proximity
@@ -339,6 +350,7 @@ class MainScreen(Screen):
         box.update(
             f"[b]VOLTAGE[/b]\n"
             f"  Bus    [{v_bus_col}]{v_bus:>8.1f}[/{v_bus_col}] V\n"
+            f"  Bus μ  [cyan]{avg_str}[/cyan] V  [dim](N={n_avg}/{self.avg_window})[/dim]\n"
             f"  Pin    [cyan]{v_pin:>8.3f}[/cyan] V\n"
             f"  ADC    [cyan]{self.tele_adc:>4d}[/cyan] / 1023\n"
             f"  %Max   [cyan]{pct:>5.1f}[/cyan] %\n"
@@ -519,16 +531,18 @@ class MainScreen(Screen):
 class TMSApp(App):
     TITLE = "TMS CTRL"
 
-    def __init__(self, divider: float, vref: float, max_adc: int, port: str | None) -> None:
+    def __init__(self, divider: float, vref: float, max_adc: int, avg_window: int,
+                 port: str | None) -> None:
         super().__init__()
         self.bridge = SerialBridge()
         self.divider = divider
         self.vref = vref
         self.max_adc = max_adc
+        self.avg_window = avg_window
         self.initial_port = port
 
     def on_mount(self) -> None:
-        main = MainScreen(self.bridge, self.divider, self.vref, self.max_adc)
+        main = MainScreen(self.bridge, self.divider, self.vref, self.max_adc, self.avg_window)
         self.install_screen(main, name="main")
         self.push_screen("main")
         if self.initial_port:
@@ -548,6 +562,8 @@ def main() -> int:
                     help="ADC reference voltage (default 5.0)")
     ap.add_argument("--max-adc", type=int, default=614,
                     help="Firmware MAX_ADC trip point (for display and sparkline scale)")
+    ap.add_argument("--avg-window", type=int, default=10,
+                    help="Number of recent ADC samples to average for Bus μ (default 10, ~1 s at 10 Hz)")
     ap.add_argument("--list", action="store_true",
                     help="List available serial ports and exit")
     args = ap.parse_args()
@@ -566,6 +582,7 @@ def main() -> int:
         divider=args.divider,
         vref=args.vref,
         max_adc=args.max_adc,
+        avg_window=args.avg_window,
         port=args.port,
     )
     try:
