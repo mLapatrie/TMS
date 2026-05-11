@@ -10,6 +10,9 @@ print(rm.list_resources())
 scope = rm.open_resource('USB0::62700::60986::SDS1MGDQ4R2387::0::INSTR')
 scope.timeout = 5000
 
+# Set trigger mode to single
+scope.write("TRMD SINGLE")
+
 component = "y"
 rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 columns = range(1, 16)
@@ -95,6 +98,9 @@ for r_idx, row in enumerate(rows):
                             voltage = code * (vdiv / 25) - voffset
                             time_sec = i * (1 / sara)
                             writer.writerow([time_sec, voltage])
+
+                    # Arm the trigger for the next capture
+                    scope.write("ARM")
 
                     break
                 except Exception as e:
