@@ -3,6 +3,7 @@ import os
 import time
 import csv
 import re
+import keyboard
 
 rm = pyvisa.ResourceManager("@py")
 print(rm.list_resources())
@@ -13,14 +14,14 @@ scope.timeout = 5000
 # Set trigger mode to single
 scope.write("TRMD SINGLE")
 
-component = "y"
+component = "cap"
 rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 columns = range(1, 16)
 captures = range(1, 4)
 
 
-start_row = 7
-start_col = 11
+start_row = 0
+start_col = 0
 
 os.makedirs(f"./waveforms/{component}_component", exist_ok=True)
 
@@ -62,8 +63,9 @@ for r_idx, row in enumerate(rows):
 
         draw_grid(r_idx, c_idx)
         for capture in captures:
-            print(f"Point {row},{col} Capture {capture}/3")
-            input("Press enter to save waveform")
+            print(f"Point {row},{col} Capture {capture}/{len(captures)}")
+            print("Press enter to save waveform")
+            keyboard.wait('enter')
 
             while True:
                 try:
