@@ -14,10 +14,11 @@ scope.timeout = 5000
 # Set trigger mode to single
 scope.write("TRMD SINGLE")
 
-component = "cap"
+component = "gate"
 rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
-columns = range(1, 16)
-captures = range(1, 4)
+rows = ["resistor_zoomed"]
+columns = range(1, 2)
+captures = range(1, 2)
 
 
 start_row = 0

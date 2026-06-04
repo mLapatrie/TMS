@@ -6,10 +6,10 @@ Dependencies:
     pip install "textual>=0.60" pyserial
 
 Run:
-    python tms_tui.py                    # pick port interactively
-    python tms_tui.py --port /dev/ttyACM0
-    python tms_tui.py --port COM3 --divider 100 --max-adc 614
-    python tms_tui.py --list             # list available serial ports and exit
+    python app.py                    # pick port interactively
+    python app.py --port /dev/ttyACM0
+    python app.py --port COM3 --divider 100 --max-adc 614
+    python app.py --list             # list available serial ports and exit
 
 Keybindings (see footer):
     c   charge / uncharge       a   arm / unarm
