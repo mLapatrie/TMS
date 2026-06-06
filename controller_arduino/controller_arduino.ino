@@ -17,7 +17,7 @@ static const uint8_t CAP_VOLTAGE     = A0;           // 0-5 V from divider
 // ===== Firmware overvoltage backup =====
 // PLACEHOLDER. 10-bit ADC count. Set from divider ratio and target bus voltage.
 // Example: 100:1 divider, trip at 300 V bus -> 3.00 V at A0 -> 614 counts.
-static const uint16_t MAX_ADC = 800;
+static const uint16_t MAX_ADC = 1024;
 
 // ===== Timing =====
 static const uint32_t SAMPLE_PERIOD_US = 1000;  // 1 kHz ADC sampling
