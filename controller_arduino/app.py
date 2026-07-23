@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
 """
 tms_tui.py - Terminal UI for the TMS controller.
 
@@ -43,6 +44,13 @@ from textual.screen import ModalScreen, Screen
 from textual.widgets import Footer, Label, ListItem, ListView, RichLog, Static
 
 BAUD = 115200
+ADC_FULL_SCALE = 1023
+DEFAULT_DIVIDER_RATIO = 100.0
+DEFAULT_ADC_REFERENCE_V = 5.0
+DEFAULT_MAX_ADC = 614 # must maatch MSAX_ADC in firmware
+
+# Display settings
+DEFAULT_AVG_WINDOW = 10
 SPARK_BLOCKS = " ▁▂▃▄▅▆▇█"
 SPARK_WIDTH = 32
 HISTORY_LEN = 100  # 10 s at 10 Hz telemetry
@@ -156,7 +164,7 @@ def ts() -> str:
 
 
 # ======================================================================
-# Port picker modal
+# Port picker
 # ======================================================================
 
 class PortPicker(ModalScreen[str]):
@@ -327,6 +335,7 @@ class MainScreen(Screen):
         v_pin = (self.tele_adc / 1023.0) * self.vref
         v_bus = v_pin * self.divider
         pct = (self.tele_adc / self.max_adc * 100.0) if self.max_adc else 0.0
+
         # moving average over the last N ADC samples
         window = list(self.history)[-self.avg_window:]
         n_avg = len(window)
@@ -338,6 +347,7 @@ class MainScreen(Screen):
             avg_str = "     ---"
         ms = self.tele_t_ms
         tstr = f"{ms // 60000:02d}:{(ms // 1000) % 60:02d}.{ms % 1000:03d}"
+        
         # sparkline colour reflects overvoltage proximity
         if pct >= 100:
             spark_col = "red"
@@ -346,6 +356,7 @@ class MainScreen(Screen):
         else:
             spark_col = "cyan"
         spark = sparkline(list(self.history), SPARK_WIDTH, self.max_adc)
+
         v_bus_col = "red bold" if pct >= 100 else ("yellow bold" if pct >= 80 else "cyan bold")
         box.update(
             f"[b]VOLTAGE[/b]\n"
@@ -394,7 +405,7 @@ class MainScreen(Screen):
         log.write(f"[dim]{ts()}[/dim]  {rich_msg}")
 
     # ------------------------------------------------------------------
-    # serial plumbing
+    # serial input
     # ------------------------------------------------------------------
 
     def drain_queue(self) -> None:
@@ -556,17 +567,26 @@ class TMSApp(App):
 def main() -> int:
     ap = argparse.ArgumentParser(description="TMS controller TUI")
     ap.add_argument("--port", help="Serial port (e.g. /dev/ttyACM0 or COM3). If omitted, pick in UI.")
-    ap.add_argument("--divider", type=float, default=100.0,
+    ap.add_argument("--divider", type=float, default=DEFAULT_DIVIDER_RATIO,
                     help="Voltage divider ratio V_bus / V_pin (default 100)")
-    ap.add_argument("--vref", type=float, default=5.0,
+    ap.add_argument("--vref", type=float, default=DEFAULT_ADC_REFERENCE_V,
                     help="ADC reference voltage (default 5.0)")
-    ap.add_argument("--max-adc", type=int, default=614,
+    ap.add_argument("--max-adc", type=int, default=DEFAULT_MAX_ADC,
                     help="Firmware MAX_ADC trip point (for display and sparkline scale)")
-    ap.add_argument("--avg-window", type=int, default=10,
+    ap.add_argument("--avg-window", type=int, default=DEFAULT_AVG_WINDOW,
                     help="Number of recent ADC samples to average for Bus μ (default 10, ~1 s at 10 Hz)")
     ap.add_argument("--list", action="store_true",
                     help="List available serial ports and exit")
     args = ap.parse_args()
+
+    if args.divider <= 0:
+        ap.error("--divider must be greater than zero")
+    if args.vref <= 0:
+        ap.error("--vref must be greater than zero")
+    if not 1 <= args.max_adc <= ADC_FULL_SCALE:
+        ap.error(f"--max-adc must be between 1 and {ADC_FULL_SCALE}")
+    if args.avg_window < 1:
+        ap.error("--avg-window must be at least 1")
 
     if args.list:
         ports = list(serial.tools.list_ports.comports())
