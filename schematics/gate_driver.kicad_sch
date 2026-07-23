@@ -1035,7 +1035,7 @@
   (symbol (lib_id "Isolator:VO2611") (at 92.71 106.68 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 45649039-39c0-4e6f-ab29-b47b76778553)
-    (property "Reference" "U10" (at 95.25 91.44 0)
+    (property "Reference" "U11" (at 95.25 91.44 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "VO2611" (at 95.25 93.98 0)
@@ -1058,7 +1058,7 @@
     (instances
       (project "tms"
         (path "/dc88686f-c772-4c63-b1cc-83a281c6b46c/025e288f-ab42-4019-86f4-e6a324d46d8a"
-          (reference "U10") (unit 1)
+          (reference "U11") (unit 1)
         )
       )
     )
@@ -1067,7 +1067,7 @@
   (symbol (lib_id "Device:C") (at 144.78 85.09 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 8c265eee-9a35-48ae-b07e-c786acf8cbab)
-    (property "Reference" "C19" (at 144.78 78.74 90)
+    (property "Reference" "C15" (at 144.78 78.74 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "100μF" (at 144.78 81.28 90)
@@ -1084,7 +1084,7 @@
     (instances
       (project "tms"
         (path "/dc88686f-c772-4c63-b1cc-83a281c6b46c/025e288f-ab42-4019-86f4-e6a324d46d8a"
-          (reference "C19") (unit 1)
+          (reference "C15") (unit 1)
         )
       )
     )
@@ -1170,7 +1170,7 @@
   (symbol (lib_id "Device:C") (at 144.78 73.66 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid d8d5c3e8-9177-4eff-9242-2165966ec3cf)
-    (property "Reference" "C18" (at 144.78 67.31 90)
+    (property "Reference" "C14" (at 144.78 67.31 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "0.1μF" (at 144.78 69.85 90)
@@ -1187,7 +1187,7 @@
     (instances
       (project "tms"
         (path "/dc88686f-c772-4c63-b1cc-83a281c6b46c/025e288f-ab42-4019-86f4-e6a324d46d8a"
-          (reference "C18") (unit 1)
+          (reference "C14") (unit 1)
         )
       )
     )
@@ -1273,7 +1273,7 @@
   (symbol (lib_id "Driver_FET:TC4422") (at 134.62 93.98 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid e42d41b6-0af2-4039-a924-6a5e0285eec3)
-    (property "Reference" "U11" (at 134.62 81.28 0)
+    (property "Reference" "U12" (at 134.62 81.28 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "TC4420" (at 134.62 83.82 0)
@@ -1296,7 +1296,7 @@
     (instances
       (project "tms"
         (path "/dc88686f-c772-4c63-b1cc-83a281c6b46c/025e288f-ab42-4019-86f4-e6a324d46d8a"
-          (reference "U11") (unit 1)
+          (reference "U12") (unit 1)
         )
       )
     )
@@ -1305,7 +1305,7 @@
   (symbol (lib_id "Device:C") (at 101.6 113.03 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f072f9ee-6283-477f-b1f9-730357172f01)
-    (property "Reference" "C16" (at 104.14 113.03 0)
+    (property "Reference" "C13" (at 104.14 113.03 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "0.1uF" (at 104.14 115.57 0)
@@ -1322,7 +1322,7 @@
     (instances
       (project "tms"
         (path "/dc88686f-c772-4c63-b1cc-83a281c6b46c/025e288f-ab42-4019-86f4-e6a324d46d8a"
-          (reference "C16") (unit 1)
+          (reference "C13") (unit 1)
         )
       )
     )
