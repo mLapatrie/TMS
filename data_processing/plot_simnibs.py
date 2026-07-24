@@ -3,8 +3,12 @@ from simnibs import mesh_io
 import numpy as np
 import sys
 
+
+# NOTE: Must be run in a Python environment where SimNIBS 4.6 is installed and accessible. Usually available under your SimNIBS installation path
+
+
 # 1. Load the mesh
-msh_path = '/home/maxence/Downloads/simnibs4_examples/simnibs_simulation/ernie_TMS_1-0001_MagVenture_C-B60_scalar.msh'
+msh_path = 'TODO/simnibs4_examples/simnibs_simulation/ernie_TMS_1-0001_MagVenture_C-B60_scalar.msh' # Update this path to your actual SimNIBS mesh file
 try:
     msh = mesh_io.read_msh(msh_path)
 except Exception as e:

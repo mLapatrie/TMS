@@ -14,12 +14,10 @@ scope.timeout = 5000
 # Set trigger mode to single
 scope.write("TRMD SINGLE")
 
-component = "MagVentureY"
-rows = ['D', 'E']
+component = "X"
 rows = ["A", "B", "C", "D", "E", "F", "G", "H"]
-columns = range(11,13) # 4,6 11,13
-captures = range(1, 2)
-
+columns = range(1,16)
+captures = range(1, 4)
 
 start_row = 0
 start_col = 0
