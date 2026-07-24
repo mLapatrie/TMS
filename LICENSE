@@ -1,0 +1,47 @@
+Low-Cost Transcranial Magnetic Stimulation - LICENSING NOTICE
+
+Copyright (c) 2026 Maxence Lapatrie and contributors
+
+This repository contains materials distributed under multiple licenses. A
+license applies only to material for which the relevant licensor owns or
+controls the necessary rights. Copyright and license notices contained in
+individual files take precedence over this summary.
+
+1. Hardware design source
+
+The project-authored hardware design source is licensed under the CERN Open
+Hardware License Version 2 - Permissive (CERN-OHL-P-2.0).
+
+Covered paths:
+
+    2d_models/**
+    3d_models/**
+    schematics/**
+    simulations/*.asc
+
+This includes the project-authored electrical schematics, circuit simulation files, mechanical models, fabrication drawings, and their exported forms within those directories.
+
+The complete license text is provided at:
+
+    LICENSES/CERN-OHL-P-2.0.pdf
+
+SPDX-License-Identifier: CERN-OHL-P-2.0
+
+
+2. Software
+
+Project-authored software is licensed under the MIT License.
+
+Covered paths:
+
+    controller_arduino/**
+    data_processing/*.py
+    data_processing/*.ipynb
+    requirements.txt
+
+The complete license text is provided at:
+
+    LICENSES/MIT.txt
+
+SPDX-License-Identifier: MIT
+
