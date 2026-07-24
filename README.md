@@ -165,4 +165,4 @@ for this prototype, but they are not a substitute for a complete,
 site-specific risk assessment or formal training.
 
 ## Licensing
-The controller source files, data analysis code, and data collection code are licensed under the MIT SPDX license. The SimNIBS-derived coil-generation example retains its GPLv3 notice. All hardware files are licensed under the CERN-OHL-P-2.0 license. Read [LICENSE](LICENSE) for more information.
+The controller source files, data analysis code, and data collection code are licensed under the MIT SPDX license. The SimNIBS-derived coil-generation example retains its GPLv3 notice. All hardware files are licensed under the CERN-OHL-P-2.0 license. Project-authored data, figures, and documentation are licensed under the CC-BY-4.0 license. Read [LICENSE](LICENSE) for more information. 
