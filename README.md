@@ -47,8 +47,7 @@ See the complete [schematic](schematics/tms_schematic.pdf) for a more detailed u
 | [`TMS_field_grid.pdf`](TMS_field_grid.pdf) | Coordinate grids used for magnetic-field measurements |
 | [`requirements.txt`](requirements.txt) | Pinned Python analysis environment |
 
-Editable source files are included wherever possible. The PDF, SVG, STL, and
-PNG files are provided as convenient exports.
+Editable source files are included wherever possible. The PDF, SVG, STL, and PNG files are provided for convenience.
 
 ## Software setup
 
@@ -65,10 +64,7 @@ python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
 Additional dependencies not included above:
-- SimNIBS 4.6 is required by
-  `data_processing/create_simple_figure_of_8_coil.py` and
-  `data_processing/plot_simnibs.py`. Run these scripts in the Python
-  environment supplied with the SimNIBS installation.
+- SimNIBS 4.6 is required by `data_processing/create_simple_figure_of_8_coil.py` and `data_processing/plot_simnibs.py`. Run these scripts in the Python environment supplied with the SimNIBS installation.
 - KiCad, LTspice, and FreeCAD are recommended if one desires to edit the design files.
 
 ### Controller interface
@@ -137,32 +133,22 @@ Use [`TMS_field_grid.pdf`](TMS_field_grid.pdf) to help position your pickup coil
 
 Change `user_local_dir` at the beginning of the notebook before running it. Select `homemade_coil` and `low_voltage` to match the dataset being analyzed.
 
-### Other workflows
+### Other data analysis helpers
 
-- [`plot_gate_pulses.ipynb`](data_processing/plot_gate_pulses.ipynb) compares
-  the microcontroller and gate-resistor pulses and estimates the gate-current
-  rise rate. It expects local files under `waveforms/gate_component/`.
-- [`create_simple_figure_of_8_coil.py`](data_processing/create_simple_figure_of_8_coil.py)
-  creates the line-segment TMS coil model used by SimNIBS.
-- [`plot_simnibs.py`](data_processing/plot_simnibs.py) renders a SimNIBS mesh
-  using PyVista. Replace the placeholder `msh_path` before running it.
+- [`plot_gate_pulses.ipynb`](data_processing/plot_gate_pulses.ipynb) compares the microcontroller and gate-resistor pulses and estimates the gate-current rise rate. It expects local files under `waveforms/gate_component/`.
+- [`create_simple_figure_of_8_coil.py`](data_processing/create_simple_figure_of_8_coil.py) creates the line-segment TMS coil model used by SimNIBS.
+- [`plot_simnibs.py`](data_processing/plot_simnibs.py) renders a SimNIBS mesh using PyVista. Replace the placeholder `msh_path` before running it.
 
 ## Example validation output
 
-The repository includes raw low-voltage, high-voltage, and commercial-coil
-reference measurements. The figure below compares the measured and
-wire-segment-model dB/dt maps and shows the global
-least-squares fits used to estimate coil dI/dt at low and
-high capacitor-bank voltages:
+The repository includes raw low-voltage, high-voltage, and commercial-coil reference measurements. The figure below compares the measured and wire-segment-model dB/dt maps and shows the global least-squares fits used to estimate coil dI/dt at low and high capacitor-bank voltages:
 
 ![Empirical and modeled dB/dt maps with estimated coil dI/dt](figures/db_dt%20to%20di_dt.png)
 
-## Safety documentation and limitations
+## Safety documentation
 
-Read [`Safety_Checklists.pdf`](Safety_Checklists.pdf) before inspecting or
-operating the physical system. These checklists document the procedures used
-for this prototype, but they are not a substitute for a complete,
-site-specific risk assessment or formal training.
+Read [`Safety_Checklists.pdf`](Safety_Checklists.pdf) before inspecting or operating the physical system. These checklists document the procedures used for this prototype, but they are not a substitute for a complete, site-specific risk assessment or formal training.
 
 ## Licensing
+
 The controller source files, data analysis code, and data collection code are licensed under the MIT SPDX license. The SimNIBS-derived coil-generation example retains its GPLv3 notice. All hardware files are licensed under the CERN-OHL-P-2.0 license. Project-authored data, figures, and documentation are licensed under the CC-BY-4.0 license. Read [LICENSE](LICENSE) for more information. 
