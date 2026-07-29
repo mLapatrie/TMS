@@ -136,7 +136,7 @@ Change `user_local_dir` at the beginning of the notebook before running it. Sele
 ### Other data analysis helpers
 
 - [`plot_gate_pulses.ipynb`](data_processing/plot_gate_pulses.ipynb) compares the microcontroller and gate-resistor pulses and estimates the gate-current rise rate. It expects local files under `waveforms/gate_component/`.
-- [`create_simple_figure_of_8_coil.py`](data_processing/create_simple_figure_of_8_coil.py) creates the line-segment TMS coil model used by SimNIBS.
+- [`create_fo8_coil.py`](data_processing/create_fo8_coil.py) creates the line-segment TMS coil model used by SimNIBS.
 
 ## Example validation output
 
